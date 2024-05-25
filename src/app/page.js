@@ -4,7 +4,6 @@ import Our_Journey from "./components/ourJourney";
 import Our_vision from "./components/ourVision";
 import Our_Mission from "./components/ourMission";
 export default function Home() {
-  
   return (
     <>
       <div className="relative mt-20 d-flex justify-center items-center">
@@ -51,7 +50,9 @@ export default function Home() {
               Engineering consultant and ongoing Supply from numerous venders.
             </p>
           </div>
-          <Our_value/>
+          <div className="pb-10">
+            <Our_value />
+          </div>
           <div className="my-4">
             <h1 className="text-2xl font-bold text-center py-4">Directors</h1>
             <p className="text-center">
@@ -60,10 +61,10 @@ export default function Home() {
               Sohail Ahmed Naseem: Managing Director
             </p>
           </div>
-          <Our_Journey/>
+          <Our_Journey />
           <div className="grid md:grid-cols-2 gap-10 justify-evenly py-10 mx-auto ">
-            <Our_vision/>
-            <Our_Mission/>
+            <Our_vision />
+            <Our_Mission />
           </div>
         </div>
       </div>

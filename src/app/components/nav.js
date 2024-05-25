@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,23 +9,29 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const router = useRouter();
+  const pathname = usePathname(); // Use usePathname instead of router.pathname
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleDropdown = (dropdown) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
+  const isActive = (path) =>
+    pathname === path
+      ? "bg-red-600 text-white"
+      : "hover:bg-red-600 hover:text-white";
 
   return (
-    <div className="relative">
-      <nav className="w-full bg-white shadow-md fixed top-0 z-50">
+    <nav className="relative">
+      <div className="w-full bg-white shadow-md fixed top-0 z-50">
         <div className="flex max-w-[1100px] mx-auto justify-around items-center w-full h-28 px-4">
           <Link href="/">
             <Image
               src="/kppl-logo-1024x439.png"
               alt="Khyber Petroleum"
               width={200}
-              height={85}
-              className="cursor-pointer"
+              height={105}
+              className="cursor-pointer h-full"
               title="Khyber Petroleum"
             />
           </Link>
@@ -51,97 +57,117 @@ export default function Nav() {
               />
             </svg>
           </div>
-          <div className="hidden md:flex w-full justify-center">
+          <div className="hidden md:flex w-full justify-center ml-8">
             <ul className="flex flex-row gap-4 text-slate-700 items-center">
               <li className="relative group">
                 <Link
                   href="/"
-                  className="hover:bg-red-600 hover:text-white rounded-full py-1 px-3"
+                  className={`${isActive("/")} rounded-full py-1 px-3`}
                 >
                   Home
                 </Link>
               </li>
               <li className="relative group">
                 <Link
-                  href="./management"
-                  className="hover:bg-red-600 hover:text-white rounded-full py-1 px-3"
+                  href="/management"
+                  className={`${isActive(
+                    "/management"
+                  )} rounded-full py-1 px-3`}
                 >
-                  Managemnet
+                  Management
                 </Link>
               </li>
               <li className="relative group">
-                <Link
+                <div
                   onMouseEnter={() => toggleDropdown("about")}
-                  // onMouseLeave={() => toggleDropdown(null)}
-                  href="#"
-                  className="rounded-full py-1 px-3 flex items-center gap-2"
+                  className={`rounded-full py-1 px-3 flex items-center gap-2 cursor-pointer ${
+                    isActive("/our-company") ||
+                    isActive("/our-journey") ||
+                    isActive("/our-vision") ||
+                    isActive("/our-mission")
+                      ? "hover:bg-red-600 hover:text-white"
+                      : ""
+                  }`}
                 >
                   About
-                  <MdKeyboardArrowDown className="text-slate-700 cursor-pointer" />
-                </Link>
+                  <MdKeyboardArrowDown className="text-slate-700" />
+                </div>
                 {openDropdown === "about" && (
                   <ul
                     className="absolute left-0 mt-2 p-2 w-48 bg-white shadow-md rounded"
                     onMouseLeave={() => toggleDropdown(null)}
                   >
                     <li className="hover:bg-red-600 hover:text-white my-1 rounded-full py-1 px-3">
-                      <Link href="./our-company">Company Overview</Link>
+                      <Link href="/our-company">Company Overview</Link>
                     </li>
                     <li className="hover:bg-red-600 hover:text-white my-1 rounded-full py-1 px-3">
-                      <Link href="./our-journey">Our Journey</Link>
+                      <Link href="/our-journey">Our Journey</Link>
                     </li>
                     <li className="hover:bg-red-600 hover:text-white my-1 rounded-full py-1 px-3">
-                      <Link href="./our-vision">Our Vision</Link>
+                      <Link href="/our-vision">Our Vision</Link>
                     </li>
                     <li className="hover:bg-red-600 hover:text-white my-1 rounded-full py-1 px-3">
-                      <Link href="./our-mission">Our Mission</Link>
+                      <Link href="/our-mission">Our Mission</Link>
                     </li>
                   </ul>
                 )}
               </li>
               <li className="relative group">
-                <Link
-                  href="#"
-                  className="rounded-full py-1 px-3 flex gap-2 items-center"
+                <div
                   onMouseEnter={() => toggleDropdown("storage")}
+                  className={`rounded-full py-1 px-3 flex gap-2 items-center cursor-pointer ${isActive(
+                    "/storage"
+                  )}`}
                 >
                   Storage & Sites
-                  <MdKeyboardArrowDown className="text-slate-700 cursor-pointer" />
-                </Link>
+                  <MdKeyboardArrowDown className="text-slate-700" />
+                </div>
                 {openDropdown === "storage" && (
                   <ul
                     className="absolute left-0 mt-2 w-max p-2 py-4 bg-white shadow-md rounded"
                     onMouseLeave={() => toggleDropdown(null)}
                   >
                     <li className="hover:bg-red-600 hover:text-white rounded-full my-1 py-1 px-3">
-                      <Link href="#">Province Wise Storage Capacity</Link>
+                      <Link
+                        href="/province-storage"
+                        className={`${isActive("/province-storage")}`}
+                      >
+                        Province Wise Storage Capacity
+                      </Link>
                     </li>
                     <li className="hover:bg-red-600 hover:text-white rounded-full my-1 py-1 px-3">
-                      <Link href="#">Allowed Number of Sites</Link>
+                      <Link
+                        href="/allowed-sites"
+                        className={`${isActive("/allowed-sites")}`}
+                      >
+                        Allowed Number of Sites
+                      </Link>
                     </li>
                   </ul>
                 )}
               </li>
               <li className="relative group">
                 <Link
-                  href="./hse"
-                  className="hover:bg-red-600 hover:text-white rounded-full p-2"
+                  href="/hse"
+                  className={`${isActive("/hse")} rounded-full p-2`}
                 >
                   HSE
                 </Link>
               </li>
               <li className="relative group">
                 <Link
-                  href="./investors-relations"
-                  className="hover:bg-red-600 hover:text-white rounded-full p-2"
+                  href="/investors-relations"
+                  className={`${isActive(
+                    "/investors-relations"
+                  )} rounded-full p-2`}
                 >
                   Investor Relations
                 </Link>
               </li>
               <li className="relative group">
                 <Link
-                  href="./contact-us"
-                  className="hover:bg-red-600 hover:text-white rounded-full p-2"
+                  href="/contact-us"
+                  className={`${isActive("/contact-us")} rounded-full p-2`}
                 >
                   Contact Us
                 </Link>
@@ -149,31 +175,29 @@ export default function Nav() {
             </ul>
           </div>
         </div>
-      </nav>
+      </div>
       {isOpen && (
         <div className="fixed inset-0 z-40">
           <div
             className="absolute inset-0 bg-black opacity-50"
             onClick={toggleMenu}
           ></div>
-           <svg
+          <svg
             onClick={toggleMenu}
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 mt-32 ml-2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            </svg>
-          <div className="absolute right-0 top-0 mt-28 bg-white h-full w-1/2 sm:w-1/3 z-50 p-4">
-           
-
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 mt-32 ml-2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+          <div className="absolute right-0 top-0 mt-28 bg-white h-full w-2/3 sm:w-1/3 z-50 p-4">
             <ul className="mt-4 space-y-4">
               <li>
                 <Link
@@ -185,35 +209,92 @@ export default function Nav() {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="#"
-                  className="block hover:bg-red-600 hover:text-white rounded p-2"
-                  onClick={toggleMenu}
+                <div
+                  className={`flex items-center justify-between hover:bg-red-600 hover:text-white rounded p-2 cursor-pointer ${
+                    openDropdown === "about" ? "bg-red-600 text-white" : ""
+                  }`}
+                  onClick={() => toggleDropdown("about")}
                 >
                   About
-                </Link>
+                  <MdKeyboardArrowDown className="text-slate-700" />
+                </div>
+                {openDropdown === "about" && (
+                  <ul className="pl-4 mt-2 space-y-2">
+                    <li>
+                      <Link
+                        href="/our-company"
+                        className="block hover:bg-red-600 hover:text-white rounded p-2"
+                        onClick={toggleMenu}
+                      >
+                        Company Overview
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/our-journey"
+                        className="block hover:bg-red-600 hover:text-white rounded p-2"
+                        onClick={toggleMenu}
+                      >
+                        Our Journey
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/our-vision"
+                        className="block hover:bg-red-600 hover:text-white rounded p-2"
+                        onClick={toggleMenu}
+                      >
+                        Our Vision
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/our-mission"
+                        className="block hover:bg-red-600 hover:text-white rounded p-2"
+                        onClick={toggleMenu}
+                      >
+                        Our Mission
+                      </Link>
+                    </li>
+                  </ul>
+                )}
               </li>
               <li>
-                <Link
-                  href="#"
-                  className="block hover:bg-red-600 hover:text-white rounded p-2"
-                  onClick={toggleMenu}
-                >
-                  Management
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="block hover:bg-red-600 hover:text-white rounded p-2"
-                  onClick={toggleMenu}
+                <div
+                  className={`flex items-center justify-between hover:bg-red-600 hover:text-white rounded p-2 cursor-pointer ${
+                    openDropdown === "storage" ? "bg-red-600 text-white" : ""
+                  }`}
+                  onClick={() => toggleDropdown("storage")}
                 >
                   Storage & Sites
-                </Link>
+                  <MdKeyboardArrowDown className="text-slate-700" />
+                </div>
+                {openDropdown === "storage" && (
+                  <ul className="pl-4 mt-2 space-y-2">
+                    <li>
+                      <Link
+                        href="/province-storage"
+                        className="block hover:bg-red-600 hover:text-white rounded p-2"
+                        onClick={toggleMenu}
+                      >
+                        Province Wise Storage Capacity
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/allowed-sites"
+                        className="block hover:bg-red-600 hover:text-white rounded p-2"
+                        onClick={toggleMenu}
+                      >
+                        Allowed Number of Sites
+                      </Link>
+                    </li>
+                  </ul>
+                )}
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/hse"
                   className="block hover:bg-red-600 hover:text-white rounded p-2"
                   onClick={toggleMenu}
                 >
@@ -222,7 +303,7 @@ export default function Nav() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/investor-relations"
                   className="block hover:bg-red-600 hover:text-white rounded p-2"
                   onClick={toggleMenu}
                 >
@@ -231,7 +312,7 @@ export default function Nav() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/contact-us"
                   className="block hover:bg-red-600 hover:text-white rounded p-2"
                   onClick={toggleMenu}
                 >
@@ -242,6 +323,6 @@ export default function Nav() {
           </div>
         </div>
       )}
-    </div>
+    </nav>
   );
 }
