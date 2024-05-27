@@ -57,7 +57,7 @@ export default function Our_value() {
             />
             <h1 className="text-slate-900 text-2xl text-center my-2">Diversity</h1>
             <p className="text-slate-900 text-center">
-            Diversity is not just a value; it's our driving force, fostering innovation and inclusivity in every aspect of our company.
+            Diversity is not just a value; it is our driving force, fostering innovation and inclusivity in every aspect of our company.
             </p>
           </div>
         </div>
