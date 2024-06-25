@@ -24,7 +24,7 @@ export default function Nav() {
   return (
     <nav className="relative">
       <div className="w-full bg-white shadow-md fixed top-0 z-50">
-        <div className="flex max-w-[1100px] mx-auto justify-around items-center w-full h-28 px-4">
+        <div className="flex max-w-[1100px] mx-auto justify-around items-center w-full h-28 sm:px-4">
           <Link href="/">
             <Image
               src="/kppl-logo-1024x439.png"
@@ -130,7 +130,7 @@ export default function Nav() {
                     <li className="hover:bg-red-600 hover:text-white rounded-full my-1 py-1 px-3">
                       <Link
                         href="/province-storage"
-                        className={`${isActive("/province-storage")}`}
+                        className={`rounded-full py-1 px-3 flex gap-2 items-center cursor-pointer  ${isActive("/province-storage")}`}
                       >
                         Province Wise Storage Capacity
                       </Link>
@@ -138,7 +138,7 @@ export default function Nav() {
                     <li className="hover:bg-red-600 hover:text-white rounded-full my-1 py-1 px-3">
                       <Link
                         href="/allowed-sites"
-                        className={`${isActive("/allowed-sites")}`}
+                        className={`rounded-full py-1 px-3 flex gap-2 items-center cursor-pointer ${isActive("/allowed-sites")}`}
                       >
                         Allowed Number of Sites
                       </Link>
@@ -303,7 +303,7 @@ export default function Nav() {
               </li>
               <li>
                 <Link
-                  href="/investor-relations"
+                  href="/investors-relations"
                   className="block hover:bg-red-600 hover:text-white rounded p-2"
                   onClick={toggleMenu}
                 >

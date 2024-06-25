@@ -17,7 +17,7 @@ export default function Home() {
             title="Khyber Petroleum"
           />
 
-          <div className="absolute z-10 top-2/3 md:left-1/2 max-w-[1800px] mx-auto  md:transform md:-translate-x-1/2 -translate-y-1/2  text-center text-white">
+          <div className="absolute z-10 top-2/3 md:left-1/2 max-w-[1800px] sm:mx-auto  mx-3 md:transform md:-translate-x-1/2 -translate-y-1/2  text-center text-white">
             <h1 className="text-white text-center uppercase md:text-3xl font-medium text-lg">
               Welcome to Khyber Petroleum Pvt Ltd.
             </h1>
@@ -31,9 +31,9 @@ export default function Home() {
         </div>
         <div className="absolute z-0 inset-0 bg-black bg-opacity-50 "></div>
       </div>
-      <div className="relative my-10">
+      <div className="relative my-10 mx-4">
         <div className="w-full mx-auto max-w-[1080px] pt-10">
-          <div className="border-b pb-4">
+          <div className="border-b pb-4 ">
             <h1 className="text-center uppercase md:text-3xl sm:text-2xl text-xl font-bold text-slate-900 my-4">
               COMPANY OVERVIEW
             </h1>

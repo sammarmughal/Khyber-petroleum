@@ -2,7 +2,7 @@ import Image from "next/image";
 export default function Our_value() {
   return (
     <>
-      <div className="my-10 pt-10">
+      <div className="my-10 pt-10 mx-4">
         <h1 className="uppercase text-center text-slate-900 text-2xl font-bold py-4">
           Our Value
         </h1>

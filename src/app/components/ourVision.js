@@ -2,7 +2,7 @@ import Image from "next/image"
 export default function Our_vision(){
     return(
         <>
-            <div className="flex flex-col gap-6 mx-auto">
+            <div className="flex flex-col gap-6 sm:mx-auto mx-4">
               <div className="w-full">
                 <Image
                   src="/our-vision-kppl-pk-300x300.png"
